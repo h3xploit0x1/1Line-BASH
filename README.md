@@ -1,8 +1,12 @@
 ## Simple 1Line #BASH For #BugBounty.
 
-```waybackurls TARGET.COM | grep = | tee urls.txt | nuclei -dast```
+```
+waybackurls TARGET.COM | grep = | tee urls.txt | nuclei -dast
+```
 
-```gau TARGET.COM | grep = | tee urls.txt | nuclei -dast```
+```
+gau TARGET.COM | grep = | tee urls.txt | nuclei -dast
+```
 
 
 ## 1Line BASH To Perform #SQL_Injection For BugBounties.
