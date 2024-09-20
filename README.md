@@ -76,3 +76,31 @@ cat hosts.txt | httpx -path /login -p 80,443,8080,8443 -mc 401,403 -silent -t 30
 ```
 echo tesla.com | subfinder -silent | httpx -silent | cariddi -intensive
 ```
+
+
+## Censys for a specific domain and extract IP addresses.
+
+```
+censys search "target.com" --index-type hosts | jq -c '.results[] | {ip: .ip}' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+'
+```
+
+
+## Use Shodan in the terminal (CLI) to search for IPs.
+
+```
+shodan search "Ssl.cert.subject.CN:\"target.com\"" --fields ip_str | anew ips.txt
+```
+
+
+## One-Liner to Resolve and Save IP Addresses from Domains.Txt file.
+
+```
+cat live-domain.txt | httpx -ip -silent -timeout 10 | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | tee domains-ips.txt
+```
+
+
+## Extract hidden parameters in JS file [after you download it).
+
+```
+cat main.js | grep -oE '("[^"]*"|'[^']*'|\/[a-zA-Z0-9_/?=]+)' | sed -E 's/^["\']|["\']$//g' | sort -u
+```
