@@ -104,3 +104,17 @@ cat live-domain.txt | httpx -ip -silent -timeout 10 | grep -o '[0-9]\{1,3\}\.[0-
 ```
 cat main.js | grep -oE '("[^"]*"|'[^']*'|\/[a-zA-Z0-9_/?=]+)' | sed -E 's/^["\']|["\']$//g' | sort -u
 ```
+
+
+## Alternative method for finding SQL injectable endpoints using katana 
+
+```
+echo https://example.com | katana -d 5 -ps -pss waybackarchive,commoncrawl,alienvault -f qurl | uro | grep -E '.php|.asp|.aspx|.jspx|.jsp'
+```
+
+
+## Comprehensive SQL injection testing using sqlmap
+
+```
+subfinder -d https://example.com -all -silent | gau | urldedupe | gf sqli >sql.txt; sqlmap -m sql.txt --batch --dbs --risk 2 --level 5 --random-agent
+```
